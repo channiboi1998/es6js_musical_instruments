@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Musical Instruments Assignment</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    </head>
+    <body>
+        <section class="music-playground container p-5">
+            <h1>Musical Instruments Assignment | ES6 JS Assignment</h1>
+            <a href="#" id="play-all" class="btn btn-primary mt-3">Play All Notes</a>
+            <div id="the-instance-dom" class="row mb-5 mt-5"></div>
+            <p>Create an Inheritance on the console (wether it be Piano or Guitar). For example:</p>
+            <pre>
+                let Piano1 = new Piano('Wazowski', 'Model 360', 'Blue');
+            </pre>
+            <p class="mt-3">Some of the cool methods you can do are:</p>
+            <ol>
+                <li>
+                    <p>You can <b>CREATE NOTES</b>. But how?</p>
+                    <p>Go to console and create the notes that you want by following this template:</p>
+                    <pre>
+                    let instrumentNotes = [
+                        { note_name: 'do', note_pitch: 1 },
+                        { note_name: 're', note_pitch: 2 },
+                        { note_name: 'mi', note_pitch: 3 },
+                        { note_name: 'fa', note_pitch: 4 },
+                        { note_name: 'so', note_pitch: 5 },
+                        { note_name: 'la', note_pitch: 6 },
+                        { note_name: 'ti', note_pitch: 7 },
+                    ];
+                    </pre>
+                    <p>Create the notes by applying a chain method to your object:</p>
+                    <pre>
+                        let Piano1 = new Piano('Wazowski', 'Model 360', 'Blue').createNotes(instrumentNotes);
+                    </pre>
+                    <p><b>Note</b> that on the `note_pitch` attribute, you can only apply numbers between 0 to 8 (excluded). Otherwise it will alert an error.</p>
+                </li>
+                <li>
+                    <p>You can also <b>ADD A SINGLE NOTE</b> to your object via chaining as well. Follow this template:</p>
+                    <pre>
+                        {<i>your object</i>}.addNote("miaaa", "4");
+                    </pre>
+                </li>
+                <li>
+                    <p>You can also <b>REMOVE LAST NOTE</b> by calling this function: </p>
+                    <pre>
+                        {<i>your object</i>}.removeLastNote()
+                    </pre>
+                </li>
+                <li>
+                    <p>You can also <b>UPDATE A NOTE</b> by their ID number, by calling a function:</p>
+                    <pre>
+                        {<i>your object</i>}.changeNote(2, 'updated-note-name', 5)
+                    </pre>
+                </li>
+                <li>
+                    <p>You can also <b>SHUFFLE THE ORDER OF THE NOTES</b> by calling:</p>
+                    <pre>
+                        {<i>your object</i>}.shuffleNotes()
+                    </pre>
+                </li>
+                <li>
+                    <p>And lastly, you can <b>AUTO COMPOSE</b>, aint that cool? call this function:</p>
+                    <pre>
+                        {<i>your object</i>}.autoCompose({<i>number of how many notes you want</i>});
+                    </pre>
+                </li>
+            </ol>
+            <p>
+                <small><b>Note </b> that by default, I have created an instance of Piano and initialize autoCompose method with 10 notes.</small>
+            </p>
+        </section>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+    </body>
+</html>
+<style>
+    .note-button {
+        cursor: pointer;
+    }
+    .note-button1 {
+        background-color: #FFDEB4;
+    }
+    .note-button2 {
+        background-color: #B2A4FF;
+    }
+    .note-button3 {
+        background-color: #FFB4B4;
+    }
+    .note-button4 {
+        background-color: #FBDF07;
+    }
+    .note-button5 {
+        background-color: #89CFFD;
+    }
+    .note-button6 {
+        background-color: #F94892;
+    }
+    .note-button7 {
+        background-color: #F29393;
+    }
+</style>
+<script>
+
+    document.getElementById('play-all').addEventListener('click', function() {
+
+        let note_buttons = document.getElementsByClassName('note-button');
+
+        for (let i=0; i<note_buttons.length; i++) {
+
+            setTimeout(function timer() {
+                note_buttons[i].click();
+            }, i * 500);
+
+        }
+
+    })
+
+    function refresh_dom(notes) {
+        
+        let dom_element = document.getElementById('the-instance-dom');
+
+        dom_element.innerHTML = '';
+
+        for (let i=0; i<notes.length; i++) {
+            dom_element.innerHTML +=  '<div class="note-button note-button'+notes[i].note_pitch+' col-2 border p-3 text-center" data-pitch="'+notes[i].note_pitch+'"><p><b>Note ID#:</b> '+[i+1]+'</p><p><b>Note Name:</b> '+notes[i].note_name+'</p><p><b>Note Pitch:</b> '+notes[i].note_pitch+'</p></div>';
+        }
+
+        let note_buttons = document.getElementsByClassName('note-button');
+
+        for (let i=0; i<note_buttons.length; i++) {
+
+            note_buttons[i].addEventListener('click', function() {
+                let note_pitch = note_buttons[i].getAttribute('data-pitch');
+                new Audio(note_pitch+'.wav').play();
+            });
+
+        }
+        
+
+    }
+
+   class Note {
+
+        constructor(note_name, note_pitch) {
+        
+            this.note_name = note_name;
+            this.note_pitch = note_pitch;
+
+        }
+
+        show() {
+
+            console.log(this);
+
+        }
+
+    }
+
+    class Instrument {
+
+        constructor() {
+            
+            this.notes = [];
+            return this;
+
+        }
+
+        createNotes(instrumentNotes) {
+
+            for (let i =0; i<instrumentNotes.length; i++) {
+                if (parseInt(instrumentNotes[i].note_pitch) > 0 && parseInt(instrumentNotes[i].note_pitch) < 8) {
+                    this.notes.push(new Note(instrumentNotes[i].note_name, parseInt(instrumentNotes[i].note_pitch)));
+                } else {
+                    alert('Unable to add Note:"', instrumentNotes[i].note_name, '", Note pitch should be between 0 and 8 (excluding)');
+                }
+            }
+            refresh_dom(this.notes);
+            return this;
+
+        }
+
+        shuffleNotes() {
+
+            let m = this.notes.length, t, i;
+
+            // While there remain elements to shuffle…
+            while (m) {
+
+                // Pick a remaining element…
+                i = Math.floor(Math.random() * m--);
+
+                // And swap it with the current element.
+                t = this.notes[m];
+                this.notes[m] = this.notes[i];
+                this.notes[i] = t;
+            
+            }
+            refresh_dom(this.notes);
+            return this;
+        }
+
+        changeNote(note_position, note_name, note_pitch) {
+
+            this.notes[note_position - 1].note_name = note_name;
+            this.notes[note_position - 1].note_pitch = note_pitch;
+            refresh_dom(this.notes);
+            return this;
+
+        }
+
+        addNote(new_note_name, new_note_pitch) {
+
+            let new_record_note = [
+                { note_name: new_note_name, note_pitch: new_note_pitch },
+            ];
+
+            refresh_dom(this.notes);
+            return this.createNotes(new_record_note);
+
+        }
+
+        removeLastNote() {
+
+            this.notes.pop();
+            refresh_dom(this.notes);
+            return this;
+
+        }
+
+        autoCompose(note_count) {
+            
+            this.notes = [];
+
+            for (let i=0; i<note_count; i++) {
+                this.createNotes(this.predefined_notes());
+            }
+            
+            refresh_dom(this.notes);
+            return this;
+
+        }
+
+
+        predefined_notes() {
+
+            const instrumentNotes = [
+                [{ note_name: 'do', note_pitch: 1 }],
+                [{ note_name: 're', note_pitch: 2 }],
+                [{ note_name: 'mi', note_pitch: 3 }],
+                [{ note_name: 'fa', note_pitch: 4 }],
+                [{ note_name: 'so', note_pitch: 5 }],
+                [{ note_name: 'la', note_pitch: 6 }],
+                [{ note_name: 'ti', note_pitch: 7 }],
+            ];
+
+            const random = Math.floor(Math.random() * instrumentNotes.length);
+            return instrumentNotes[random];
+
+        }
+
+    }
+
+    class Piano extends Instrument {
+
+        constructor(notes, brand_name, model, color) {
+            
+            super(notes);
+            this.brand_name = brand_name;
+            this.model = model;
+            this.color - color;
+            refresh_dom(this.notes);
+            return this;
+        }
+
+    } 
+
+    class Guitar extends Instrument {
+
+        constructor(notes, brand_name, model, color) {
+            super(notes);
+            this.brand_name = brand_name;
+            this.model = model;
+            this.color = color;
+            refresh_dom(this.notes);
+            return this;
+
+        }
+
+    }
+
+    let instrumentNotes = [
+        { note_name: 'do', note_pitch: 1 },
+        { note_name: 're', note_pitch: 2 },
+        { note_name: 'mi', note_pitch: 3 },
+        { note_name: 'fa', note_pitch: 4 },
+        { note_name: 'so', note_pitch: 5 },
+        { note_name: 'la', note_pitch: 6 },
+        { note_name: 'ti', note_pitch: 7 },
+    ];
+
+    let Piano1 = new Piano('Wazowski', 'Model 360', 'Blue')//.createNotes(instrumentNotes).addNote("miaaa", "4").removeLastNote().changeNote(2, 'updated-note-name', 5).shuffleNotes();
+    Piano1.autoCompose(10);
+
+</script>
