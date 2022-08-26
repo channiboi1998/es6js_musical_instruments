@@ -9,7 +9,7 @@
     <body>
         <section class="music-playground container p-5">
             <h1>Musical Instruments Assignment | ES6 JS Assignment</h1>
-            <small><p>By default I have initiated autoCompose with 18 Notes</p></small>
+            <small><p>By default I have initiated autoCompose() with 18 Notes</p></small>
             <a href="#" id="play-all" class="btn btn-primary mt-3">Play All Notes</a>
             <div id="the-instance-dom" class="row mb-5 mt-5"></div>
             <p>Create an Inheritance on the console (wether it be Piano or Guitar). For example:</p>
@@ -20,23 +20,41 @@
             <ol>
                 <li>
                     <p>You can <b>CREATE NOTES</b>. But how?</p>
-                    <p>Go to console and create the notes that you want by following this template:</p>
+                    <p>Go to console paste this following syntax: <i><b>Do-RE-MI - The sound of music</b></i></p>
                     <pre>
-                    let instrumentNotes = [
-                        { note_name: 'do', note_pitch: 1 },
-                        { note_name: 're', note_pitch: 2 },
-                        { note_name: 'mi', note_pitch: 3 },
-                        { note_name: 'fa', note_pitch: 4 },
-                        { note_name: 'so', note_pitch: 5 },
-                        { note_name: 'la', note_pitch: 6 },
-                        { note_name: 'ti', note_pitch: 7 },
+                        let instrumentNotes2 = [
+                            { note_name: 'do', note_pitch: 1 },
+                            { note_name: 're', note_pitch: 2 },
+                            { note_name: 'mi', note_pitch: 3 },
+                            { note_name: 'do', note_pitch: 1 },
+                            { note_name: 'mi', note_pitch: 3 },
+                            { note_name: 'do', note_pitch: 1 },
+                            { note_name: 'mi', note_pitch: 3 },
+                            { note_name: 're', note_pitch: 2 },
+                            { note_name: 'mi', note_pitch: 3 },
+                            { note_name: 'fa', note_pitch: 4 },
+                            { note_name: 'fa', note_pitch: 4 },
+                            { note_name: 'mi', note_pitch: 3 },
+                            { note_name: 're', note_pitch: 2 },
+                            { note_name: 'fa', note_pitch: 4 },
+                            { note_name: 'mi', note_pitch: 3 },
+                            { note_name: 'fa', note_pitch: 4 },
+                            { note_name: 'so', note_pitch: 5 },
+                            { note_name: 'mi', note_pitch: 3 },
+                            { note_name: 'so', note_pitch: 5 },
+                            { note_name: 'mi', note_pitch: 3 },
+                            { note_name: 'so', note_pitch: 5 },
+                            { note_name: 'fa', note_pitch: 4 },
+                            { note_name: 'so', note_pitch: 5 },
+                            { note_name: 'la', note_pitch: 6 },
+                            { note_name: 'la', note_pitch: 6 },
+                            { note_name: 'so', note_pitch: 5 },
+                            { note_name: 'fa', note_pitch: 4 },
+                            { note_name: 'la', note_pitch: 6 },
                     ];
+                    new Piano('Wazowski', 'Model 360', 'Blue').createNotes(instrumentNotes2);
                     </pre>
-                    <p>Create the notes by applying a chain method to your object:</p>
-                    <pre>
-                        let Piano1 = new Piano('Wazowski', 'Model 360', 'Blue').createNotes(instrumentNotes);
-                    </pre>
-                    <p><b>Note</b> that on the `note_pitch` attribute, you can only apply numbers between 0 to 8 (excluded). Otherwise it will alert an error.</p>
+                    <p> You can also compose whatever song  you want, just <b>Note</b> that on the `note_pitch` attribute, you can only apply numbers between 0 to 8 (excluded). Otherwise it will alert an error.</p>
                 </li>
                 <li>
                     <p>You can also <b>ADD A SINGLE NOTE</b> to your object via chaining as well. Follow this template:</p>
